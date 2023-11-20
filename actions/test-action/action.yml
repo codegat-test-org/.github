@@ -5,7 +5,6 @@ inputs:
     required: true
 outputs:
   success:
-    type: string
     value: ${{ steps.id.outputs.success }}
 runs:
   using: "composite"
