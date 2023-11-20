@@ -1,0 +1,17 @@
+inputs:
+  name:
+    type: string
+    required: true
+outputs:
+  success:
+    type: string
+runs:
+  using: "composite"
+  steps:
+    - name: hello
+      shell: bash
+      run: echo "Hello ${{ inputs.name }}!"
+    - name: return code
+      shell: bash
+      run: echo "success=1" >> $GITHUB_OUTPUT
+
