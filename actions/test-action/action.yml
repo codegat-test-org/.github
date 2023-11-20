@@ -1,10 +1,12 @@
+name: Greetings
+description: A greeting to someone
 inputs:
   name:
-    type: string
     required: true
 outputs:
   success:
     type: string
+    value: ${{ steps.id.outputs.success }}
 runs:
   using: "composite"
   steps:
@@ -12,6 +14,7 @@ runs:
       shell: bash
       run: echo "Hello ${{ inputs.name }}!"
     - name: return code
+      id: return
       shell: bash
       run: echo "success=1" >> $GITHUB_OUTPUT
 
