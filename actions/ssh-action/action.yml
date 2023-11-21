@@ -31,6 +31,7 @@ runs:
         KEY_NAME: ${{ inputs.private-key-name }}
       run: |
         ls ~/.ssh
+        touch ~/.ssh/$KEY_NAME
         echo "$KEY" > "~/.ssh/$KEY_NAME"
         chmod 600 "~/.ssh/$KEY_NAME"
         echo "path=~/.ssh/$KEY_NAME" >> $GITHUB_OUTPUT
