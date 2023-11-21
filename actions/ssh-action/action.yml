@@ -21,38 +21,27 @@ runs:
     - name: Add ~/.ssh directory
       shell: bash
       id: pk
-      env:
-        KEY: ${{ inputs.private-key }}
-        KEY_NAME: ${{ inputs.private-key-name }}
-        HOSTS: ${{ inputs.hosts }}
       run: |
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
+    - name: Add private key
+      shell: bash
+      id: pk
+      env:
+        KEY: ${{ inputs.private-key }}
+        KEY_NAME: ${{ inputs.private-key-name }}
+      run: |
+        ls ~/.ssh
+        touch ~/.ssh/$KEY_NAME
         echo "$KEY" > ~/.ssh/$KEY_NAME
         chmod 600 ~/.ssh/$KEY_NAME
         echo "path=~/.ssh/$KEY_NAME" >> $GITHUB_OUTPUT
+    - name: Add to known_hosts
+      shell: bash
+      env: 
+        HOSTS: ${{ inputs.hosts }}
+      run: |
         for host in $HOSTS; do
-          ssh-keyscan $host >> ~/.ssh/known_hosts
+          ssh-keyscan $HOST >> ~/.ssh/known_hosts
         done
         chmod 600 ~/.ssh/known_hosts 
-    # - name: Add private key
-    #   shell: bash
-    #   id: pk
-    #   env:
-    #     KEY: ${{ inputs.private-key }}
-    #     KEY_NAME: ${{ inputs.private-key-name }}
-    #   run: |
-    #     ls ~/.ssh
-    #     touch ~/.ssh/$KEY_NAME
-    #     echo "$KEY" > "~/.ssh/$KEY_NAME"
-    #     chmod 600 "~/.ssh/$KEY_NAME"
-    #     echo "path=~/.ssh/$KEY_NAME" >> $GITHUB_OUTPUT
-    # - name: Add to known_hosts
-    #   shell: bash
-    #   env: 
-    #     HOSTS: ${{ inputs.hosts }}
-    #   run: |
-    #     for host in $HOSTS; do
-    #       ssh-keyscan $HOST >> ~/.ssh/known_hosts
-    #     done
-    #     chmod 600 ~/.ssh/known_hosts 
