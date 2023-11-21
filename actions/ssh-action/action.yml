@@ -28,13 +28,11 @@ runs:
       run: |
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
-        touch ~/.ssh/$KEY_NAME
-        cat ~/.ssh/$KEY_NAME
-        echo "$KEY" > ~/.ssh/$KEY_NAME
+        echo "$KEY" > "~/.ssh/${KEY_NAME}"
         chmod 600 ~/.ssh/$KEY_NAME
         echo "path=~/.ssh/$KEY_NAME" >> $GITHUB_OUTPUT
         for host in $HOSTS; do
-          ssh-keyscan $HOST >> ~/.ssh/known_hosts
+          ssh-keyscan $host >> ~/.ssh/known_hosts
         done
         chmod 600 ~/.ssh/known_hosts 
     # - name: Add private key
