@@ -41,6 +41,6 @@ runs:
         HOSTS: ${{ inputs.hosts }}
       run: |
         for host in $HOSTS; do
-          ssh-keyscan $HOST >> ~/.ssh/known_hosts
+          ssh-keyscan $host >> ~/.ssh/known_hosts
         done
         chmod 600 ~/.ssh/known_hosts 
