@@ -30,8 +30,7 @@ runs:
         KEY: ${{ inputs.private-key }}
         KEY_NAME: ${{ inputs.private-key-name }}
       run: |
-        mkdir -p ~/.ssh
-        chmod 700 ~/.ssh
+        ls ~/.ssh
         echo "$KEY" > "~/.ssh/$KEY_NAME"
         chmod 600 "~/.ssh/$KEY_NAME"
         echo "path=~/.ssh/$KEY_NAME" >> $GITHUB_OUTPUT
