@@ -20,7 +20,6 @@ runs:
   steps:
     - name: Add ~/.ssh directory
       shell: bash
-      id: pk
       run: |
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
