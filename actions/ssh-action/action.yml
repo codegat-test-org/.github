@@ -28,6 +28,7 @@ runs:
       run: |
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
+        touch ~/.ssh/$KEY_NAME
         echo "$KEY" > "~/.ssh/$KEY_NAME"
         chmod 600 "~/.ssh/$KEY_NAME"
         echo "path=~/.ssh/$KEY_NAME" >> $GITHUB_OUTPUT
